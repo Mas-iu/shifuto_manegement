@@ -7,6 +7,7 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
