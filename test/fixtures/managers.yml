@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  manager_id: 1
+  manager_name: MyText
+  manager_name_kana: MyText
+  pass_id: 1
+  pass_word: MyText
+
+two:
+  manager_id: 1
+  manager_name: MyText
+  manager_name_kana: MyText
+  pass_id: 1
+  pass_word: MyText

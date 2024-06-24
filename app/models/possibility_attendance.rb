@@ -1,0 +1,2 @@
+class PossibilityAttendance < ApplicationRecord
+end

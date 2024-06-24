@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_24_021008) do
+ActiveRecord::Schema.define(version: 2024_06_24_060000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "decision_attendances", force: :cascade do |t|
+    t.integer "employee_id"
+    t.datetime "employee_work_time_start"
+    t.datetime "employee_work_time_end"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_work_time_end"], name: "index_decision_attendances_on_employee_work_time_end"
+    t.index ["employee_work_time_start"], name: "index_decision_attendances_on_employee_work_time_start"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.integer "employees"
+    t.text "employees_name"
+    t.text "employee_name_kana"
+    t.date "employee_requested_day_off"
+    t.integer "pass_id"
+    t.text "pass_word"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.integer "manager_id"
+    t.text "manager_name"
+    t.text "manager_name_kana"
+    t.integer "pass_id"
+    t.text "pass_word"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "possibility_attendances", force: :cascade do |t|
+    t.integer "employee_id"
+    t.datetime "employee_work_time_start"
+    t.datetime "employee_work_time_end"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_work_time_end"], name: "index_possibility_attendances_on_employee_work_time_end"
+    t.index ["employee_work_time_start"], name: "index_possibility_attendances_on_employee_work_time_start"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,7 +64,9 @@ ActiveRecord::Schema.define(version: 2024_06_24_021008) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "employee_id"
     t.text "employee_name"
+    t.text "employee_name_kana"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 1
+  employee_work_time_start: 2024-06-24 06:00:00
+  employee_work_time_end: 2024-06-24 06:00:00
+
+two:
+  employee_id: 1
+  employee_work_time_start: 2024-06-24 06:00:00
+  employee_work_time_end: 2024-06-24 06:00:00
