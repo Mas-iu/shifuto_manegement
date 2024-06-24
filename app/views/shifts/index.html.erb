@@ -1,8 +1,26 @@
 <title>Hello Ruby</title>
-<h1>Hello Ruby</title>
-<p><hn>Ruby</hn></p>
-<p>日本発祥のプログラミング言語であるRubyは、Web開発、スマホアプリ開発、スクレイピングなど、</p>
-<p>さまざまな開発に利用されています。 </p>
-<p>有志が開発した「Ruby on Rails」などの開発を強力にサポートするフレームワークなどを活用することで、</p>
-<p>SNSなどの複雑性の高い開発も容易にします。</p>
+<h1>シフト作成サービス</h1>
+<h3>自分が働ける、曜日と時間を登録しておきましょう！！</h3>
+
+<h1>出勤可能曜日</h1>
+<form action="#" method="shifts">
+	<p>チェックを付けてください<br>
+		<input type="checkbox" name=“week” value=“Sunday”>日曜日
+		<input type="checkbox" name="week" value=“Monday”>月曜日
+		<input type="checkbox" name="week" value=“Tuesday”>火曜日
+		<input type="checkbox" name="week" value=“Wednesday”>水曜日
+		<input type="checkbox" name="week" value=“Thursday”>木曜日
+		<input type="checkbox" name="week" value=“Friday”>金曜日
+		<input type="checkbox" name="week" value=“Saturday”>土曜日
+		
+	</p>
+	<p><input type="submit" value=“登録する”></p>
+</form>
+
+
+<div class="contactAgree">
+  <label><input type="checkbox" name="agree" value="agreement"> 登録する</label>
+  <input id="submitButton" type="submit" value="送信">
+</div>
+
 <%= button_to "ボタン", {controller: 'shifts', action: 'index'}, {method: :get} %>
