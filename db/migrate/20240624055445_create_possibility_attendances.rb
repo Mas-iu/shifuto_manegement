@@ -10,4 +10,5 @@ class CreatePossibilityAttendances < ActiveRecord::Migration[6.1]
     add_index :possibility_attendances, :employee_work_time_start
     add_index :possibility_attendances, :employee_work_time_end
   end
+  
 end

@@ -10,31 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_24_062910) do
+ActiveRecord::Schema.define(version: 2024_06_25_060140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "decision_attendances", force: :cascade do |t|
-    t.integer "employee_id"
     t.datetime "employee_work_time_start"
     t.datetime "employee_work_time_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["employee_work_time_end"], name: "index_decision_attendances_on_employee_work_time_end"
     t.index ["employee_work_time_start"], name: "index_decision_attendances_on_employee_work_time_start"
-  end
-
-  create_table "employees", force: :cascade do |t|
-    t.integer "employee_id"
-    t.text "employee_name"
-    t.text "employee_name_kana"
-    t.date "employee_requested_day_off"
-    t.integer "pass_id"
-    t.text "pass_word"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "employee_number"
+    t.index ["user_id"], name: "index_decision_attendances_on_user_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -48,13 +37,14 @@ ActiveRecord::Schema.define(version: 2024_06_24_062910) do
   end
 
   create_table "possibility_attendances", force: :cascade do |t|
-    t.integer "employee_id"
     t.datetime "employee_work_time_start"
     t.datetime "employee_work_time_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["employee_work_time_end"], name: "index_possibility_attendances_on_employee_work_time_end"
     t.index ["employee_work_time_start"], name: "index_possibility_attendances_on_employee_work_time_start"
+    t.index ["user_id"], name: "index_possibility_attendances_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,11 +55,13 @@ ActiveRecord::Schema.define(version: 2024_06_24_062910) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "employee_id"
     t.text "employee_name"
     t.text "employee_name_kana"
+    t.date "employee_requested_day_off"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "decision_attendances", "users"
+  add_foreign_key "possibility_attendances", "users"
 end

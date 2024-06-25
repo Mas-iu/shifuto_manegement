@@ -10,4 +10,5 @@ class CreateDecisionAttendances < ActiveRecord::Migration[6.1]
     add_index :decision_attendances, :employee_work_time_start
     add_index :decision_attendances, :employee_work_time_end
   end
+ 
 end
