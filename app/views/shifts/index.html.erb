@@ -1,26 +1,41 @@
 <title>Hello Ruby</title>
 <h1>シフト作成サービス</h1>
 <h3>自分が働ける、曜日と時間を登録しておきましょう！！</h3>
+<h1>今月のシフト</h1>
+<table>
+  <tr>
+    <th>従業員名</th>
+    <th>日付</th>
+    <th>日付</th>
+    <th>日付</th>
+  </tr>
+  <tr>
+    <td>名前</td>
+    <td>時間</td>
+    <td>時間</td>
+    <td>時間</td>
+  </tr>
+  <tr>
+    <td>名前</td>
+    <td>時間</td>
+    <td>時間</td>
+    <td>時間</td>
+  </tr>
+  <tr>
+    <td>名前</td>
+    <td>時間</td>
+    <td>時間</td>
+    <td>時間</td>
+  </tr>
+</table>
 
-<h1>出勤可能曜日</h1>
-<form action="#" method="shifts">
-	<p>チェックを付けてください<br>
-		<input type="checkbox" name=“week” value=“Sunday”>日曜日
-		<input type="checkbox" name="week" value=“Monday”>月曜日
-		<input type="checkbox" name="week" value=“Tuesday”>火曜日
-		<input type="checkbox" name="week" value=“Wednesday”>水曜日
-		<input type="checkbox" name="week" value=“Thursday”>木曜日
-		<input type="checkbox" name="week" value=“Friday”>金曜日
-		<input type="checkbox" name="week" value=“Saturday”>土曜日
-		
-	</p>
-	<p><input type="submit" value=“登録する”></p>
-</form>
+<%#<h3>☆<a href="http://localhost:3000/shifts/add">出勤条件の登録はこちら</a>☆</h3>%>
+<h3>☆
+<%= link_to("出勤条件の登録はこちら", "/shifts/add") %>
+☆
+<p>☆
+<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>
+★</p>
+</h3>
 
 
-<div class="contactAgree">
-  <label><input type="checkbox" name="agree" value="agreement"> 登録する</label>
-  <input id="submitButton" type="submit" value="送信">
-</div>
-
-<%= button_to "ボタン", {controller: 'shifts', action: 'index'}, {method: :get} %>

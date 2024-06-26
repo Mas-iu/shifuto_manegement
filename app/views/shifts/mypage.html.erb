@@ -1,0 +1,16 @@
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <% if @shifts.present? %>
+    <% @shifts.each do |shift| %>
+        <%= shift.employee_work_time_start %>
+        <%= shift.employee_work_time_end %>
+        <br>
+    <% end %>
+    <% else %>
+        <p>シフトの登録ができていません。</p>
+    <% end %>
+    
+</body>
