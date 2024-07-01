@@ -1,2 +1,3 @@
 class DecisionAttendance < ApplicationRecord
+    
 end

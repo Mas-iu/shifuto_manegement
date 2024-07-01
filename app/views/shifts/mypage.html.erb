@@ -2,15 +2,29 @@
     <meta charset="utf-8">
 </head>
 <body>
-    
-    <% if @shifts.present? %>
-    <% @shifts.each do |shift| %>
-        <%= shift.employee_work_time_start %>
-        <%= shift.employee_work_time_end %>
-        <br>
-    <% end %>
-    <% else %>
-        <p>シフトの登録ができていません。</p>
-    <% end %>
+    <h3>↓登録しているシフト↓</h3> 
+    <table>
+        <tr>
+            <th>出勤開始時間</th>
+            <th>出勤終了時間</th>
+        </tr>
+    <tbody>
+        <% if @shifts.present? %>
+        <% @shifts.each do |shift| %>
+            <tr>
+                <td><%= shift.employee_work_time_start %></td>
+                <td><%= shift.employee_work_time_end %></td>
+            </tr>
+        <% end %>
+        <% else %>
+            <p>シフトの登録ができていません。</p>
+        <% end %>
+    </tbody>
+    </table>
+
+    <p>☆
+<%= link_to("ホームへ戻る", "/shifts") %>
+☆</p>
     
 </body>
+

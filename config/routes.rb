@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'usersmanagermkshift'
       get 'complete'
       get 'mypage'
+      post 'save_shifts'
     end
   end
 end

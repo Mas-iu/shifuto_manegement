@@ -36,6 +36,14 @@
 <p>☆
 <%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>
 ★</p>
+
+ <% if @show_special_link %>
+ <p>☆
+    <%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>
+  
+  ☆</p>
+  <% end %>
+
 </h3>
 
 
