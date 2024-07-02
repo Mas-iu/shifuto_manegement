@@ -60,21 +60,35 @@ class ShiftsController < ApplicationController
     end
 
     def save_shifts
-        @user_id = params[:user_id]
-        @employee_work_time_start = params[:employee_work_time_start]
-        @employee_work_time_end = params[:employee_work_time_end]
+        
+        #@user_id = params[:user_id]
+        #@employee_work_time_start = params[:employee_work_time_start]
+        #@employee_work_time_end = params[:employee_work_time_end]
 
-            DecisionAttendance.create(
-                user_id: @user_id,
-                employee_work_time_start: @employee_work_time_start,
-                employee_work_time_end: @employee_work_time_end
+         #   DecisionAttendance.create(
+          #      user_id: @user_id,
+           #     employee_work_time_start: @employee_work_time_start,
+            #    employee_work_time_end: @employee_work_time_end
 
                 #employee_work_time_start: shift.employee_work_time_start,
                 #employee_work_time_end: shift.employee_work_time_end
-            )
+           # )
         
+        selected_shifts = params[:shifts]
+            if selected_shifts.present?
+                selected_shifts.each do |shift_id|
+                  shift_data = params[:shift_data][shift_id]
+                    DecisionAttendance.create(
+                    user_id: shift_data[:user_id],
+                    employee_work_time_start: shift_data[:employee_work_time_start],
+                    employee_work_time_end: shift_data[:employee_work_time_end]
+                  )
+                end
 
-        redirect_to complete_shifts_path
+              redirect_to complete_shifts_path
+            end
+          
+        #redirect_to complete_shifts_path
     end
 
     def mypage
