@@ -62,3 +62,14 @@
   table tr:last-child td:last-child {
     border-radius: 0 0 5px 0;
   }
+
+  .user-info {
+    margin: 0 0 0 auto;
+  }
+  
+  .box {
+      height: 150px;
+      width:  300px;
+      background-color: #ffdd00;
+  }
+

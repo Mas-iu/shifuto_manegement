@@ -1,33 +1,44 @@
 <title>Hello Ruby</title>
 <h1>シフト作成サービス</h1>
 <h3>自分が働ける、曜日と時間を登録しておきましょう！！</h3>
+
+<div class="user-info box">
+  <h3>ログインユーザー情報</h3>
+  <p>ID:<%= current_user.id %></p>
+  <p>名前:<%= current_user.employee_name %></p>
+</div>
+
 <h1>今月のシフト</h1>
-<table>
-  <tr>
-    <th>従業員名</th>
-    <th>日付</th>
-    <th>日付</th>
-    <th>日付</th>
-  </tr>
-  <tr>
-    <td>名前</td>
-    <td>時間</td>
-    <td>時間</td>
-    <td>時間</td>
-  </tr>
-  <tr>
-    <td>名前</td>
-    <td>時間</td>
-    <td>時間</td>
-    <td>時間</td>
-  </tr>
-  <tr>
-    <td>名前</td>
-    <td>時間</td>
-    <td>時間</td>
-    <td>時間</td>
-  </tr>
-</table>
+
+<% if @decision_attendances_by_date.present? %>
+  <% @decision_attendances_by_date.each do |date, decision_attendances| %>
+    <div>
+      <h2>日にち: <%= date %></h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>従業員名</th>
+            <th>日にち</th>
+            <th>時間</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% decision_attendances.each do |decision_attendances| %>
+            <tr>
+              <td><%= decision_attendances.user.employee_name %></td>
+              <td><%= decision_attendances.employee_work_time_start.to_date %></td>
+              <td><<%= decision_attendances.employee_work_time_start %></td>
+              <td><%= decision_attendances.employee_work_time_end %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <p>シフトが登録されていません。</p>
+<% end %>
+
 
 <%#<h3>☆<a href="http://localhost:3000/shifts/add">出勤条件の登録はこちら</a>☆</h3>%>
 <h3>☆
@@ -38,11 +49,11 @@
 ★</p>
 
  <% if @show_special_link %>
- <p>☆
-    <%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>
-  
-  ☆</p>
+ <p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>☆</p>
+ <p>☆<%= link_to "従業員一覧はこちら", "/shifts/usersmanager" %>☆</p>
   <% end %>
+
+   
 
 </h3>
 

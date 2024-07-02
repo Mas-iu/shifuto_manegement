@@ -1,1 +1,28 @@
-<h1>users manager home</h1>
+<h2>従業員リスト</h2>
+
+<% if @users.present? %>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>従業員ID</th>
+        <th>従業員名</th>
+        <th>従業員名カナ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |users| %>
+        <tr>
+          <td><%= users.id %></td>
+          <td><%= users.employee_name %></td>
+          <td><%= users.employee_name_kana %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>従業員が見つかりません。</p>
+<% end %>
+
+<p>☆
+<%= link_to("ホームへ戻る", "/shifts") %>
+☆</p>

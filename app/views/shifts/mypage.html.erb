@@ -2,6 +2,12 @@
     <meta charset="utf-8">
 </head>
 <body>
+    <h3>ログインユーザー情報
+    <div style="background-color: yellow; padding: 10px;">
+    <p>ID:<%= current_user.id %></p>
+    <p>名前:<%= current_user.employee_name %></p>
+    </div>
+    </h3>
     <h3>↓登録しているシフト↓</h3> 
     <table>
         <tr>

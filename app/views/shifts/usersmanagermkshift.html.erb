@@ -13,25 +13,31 @@
         <thead>
           <tr>
             <th>従業員ID</th>
+            <th>従業員名</th>
             <th>出勤開始時間</th>
             <th>出勤終了時間</th>
+            <th>登録</th>
           </tr>
         </thead>
         <tbody>
             <% shifts.each do |shift| %>
               <tr>
                 <td><%= shift.user_id %></td>
+                <td><%= shift.user.employee_name %></td>
                 <td><%= shift.employee_work_time_start %></td>
                 <td><%= shift.employee_work_time_end %></td>
+                <td><%= form_with url: save_shifts_shifts_path, method: :post do |f| %>
+                    <%= f.hidden_field :user_id, value: shift.user_id %>
+                    <%= f.hidden_field :employee_work_time_start, value: shift.employee_work_time_start %>
+                    <%= f.hidden_field :employee_work_time_end, value: shift.employee_work_time_end %>
+                    <%= submit_tag '保存' %>
+                    <% end %>
+                </td>
               </tr>
             <% end %>
 
         </tbody>
       </table>
-      <%= form_with url: save_shifts_shifts_path, method: :post do %>
-
-        <%= submit_tag '保存' %>
-      <% end %>
     </div>
   <% end %>
 <% else %>
