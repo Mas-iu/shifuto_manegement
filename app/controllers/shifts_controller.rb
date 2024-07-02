@@ -2,6 +2,7 @@ class ShiftsController < ApplicationController
     def index
         @decision_attendances = DecisionAttendance.includes(:user).all
         @decision_attendances_by_date = @decision_attendances.group_by { |decision_attendances| decision_attendances.employee_work_time_start.to_date } 
+        @dates = (Date.today.beginning_of_month..Date.today.end_of_month).to_a
         @users = User.select(:id, :employee_name, :employee_name_kana)
         @show_special_link = (current_user.id == 3)
     end

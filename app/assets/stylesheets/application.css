@@ -73,3 +73,13 @@
       background-color: #ffdd00;
   }
 
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  th, td {
+    width: 150px;
+    text-align: center;
+  }
+  
