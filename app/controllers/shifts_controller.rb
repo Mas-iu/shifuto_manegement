@@ -1,9 +1,11 @@
 class ShiftsController < ApplicationController
+    
     def index
         @decision_attendances = DecisionAttendance.includes(:user).all
         @decision_attendances_by_date = @decision_attendances.group_by { |decision_attendances| decision_attendances.employee_work_time_start.to_date } 
         @dates = (Date.today.beginning_of_month..Date.today.end_of_month).to_a
-        @users = User.select(:id, :employee_name, :employee_name_kana)
+        #@users = User.select(:id, :employee_name, :employee_name_kana)
+        @users = User.includes(:decision_attendances).all
         @show_special_link = (current_user.id == 3)
     end
 
@@ -37,12 +39,21 @@ class ShiftsController < ApplicationController
         @users = User.select(:id, :employee_name, :employee_name_kana)
     end
     
+
     def usersmanageradd
         @user = User.new(user_params)
         if @user.save
             redirect_to complete_shifts_path
         end
+
+        @decisionattendances_by_date = DecisionAttendance.includes(:user).all
+        .select(:id, :user_id, :employee_work_time_start, :employee_work_time_end)
+        .where(employee_requested_day_off: nil)
+        .order(:id, :employee_work_time_start)
+        .group_by { |da| da.employee_work_time_start.to_date}
+
     end
+
 
     def user_params
         params.permit(:employee_name, :employee_name_kana, :email, :user_id )
@@ -53,7 +64,7 @@ class ShiftsController < ApplicationController
         @shifts_by_user = PossibilityAttendance
         .select(:user_id, :employee_work_time_start, :employee_work_time_end)
         .order(:user_id, :employee_work_time_start)
-        .group_by(&:employee_work_time_start)
+
         
         @show_special_link3 = (current_user.id == 3)
         
@@ -94,6 +105,40 @@ class ShiftsController < ApplicationController
     def mypage
         @shifts = PossibilityAttendance.select(:employee_work_time_start, :employee_work_time_end).where(user_id: current_user.id)
     end
+
+    def requesteddayoff
+        @shifts = DecisionAttendance.select(:id, :employee_work_time_start, :employee_work_time_end).where(user_id: current_user.id)
+    end
+
+    def save_requested_days_off
+        if params[:requested_days_off].present?
+            params[:requested_days_off].each do |shift_id|
+            shift = DecisionAttendance.find(shift_id)
+            shift.update(employee_requested_day_off: true)
+        end
+            redirect_to complete_shifts_path, notice: '休みのリクエストが保存されました。'
+        else
+            redirect_to complete_shifts_path, alert: '休みのリクエストを選択してください。'
+        end
+    end
+
+    def decisiondayoff
+        @decisionattendances = DecisionAttendance.where(employee_requested_day_off: true)
+    end
+
+    def save_decision_days_off
+        if params[:decision_days_off].present?
+            params[:decision_days_off].each do |shift_id|
+            decisionattendance = DecisionAttendance.find(shift_id)
+            decisionattendance.update(employee_decision_day_off: true)
+        end
+            redirect_to complete_shifts_path, notice: '休みが確定されました。'
+        else
+            redirect_to complete_shifts_path, alert: '休みを選択してください。'
+        end
+    end
+
+end
     
         
-end
+

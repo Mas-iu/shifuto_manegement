@@ -10,6 +10,11 @@ Rails.application.routes.draw do
       get 'complete'
       get 'mypage'
       post 'save_shifts'
+      get 'requesteddayoff'
+      post 'save_requested_days_off'
+      get 'decisiondayoff'
+      post 'save_decision_days_off'
     end
   end
+  resources :decision_attendances, only: [:destroy]
 end

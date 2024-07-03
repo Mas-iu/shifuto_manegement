@@ -1,0 +1,31 @@
+<h3>↓休みたい日を確定してください↓</h3>
+<%= form_with url: save_decision_days_off_shifts_path, method: :post do %>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>選択</th>
+        <th>従業員名</th>
+        <th>出勤開始時間</th>
+        <th>出勤終了時間</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @decisionattendances.present? %>
+        <% @decisionattendances.each do |decisionattendance| %>
+          <tr>
+            <td><%= check_box_tag 'decision_days_off[]', decisionattendance.id %></td>
+            <td><%= decisionattendance.user.employee_name %></td>
+            <td><%= decisionattendance.employee_work_time_start %></td>
+            <td><%= decisionattendance.employee_work_time_end %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4">休みのリクエストがありません。</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag '休みを確定' %>
+<% end %>
+

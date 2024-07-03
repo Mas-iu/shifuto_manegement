@@ -1,0 +1,2 @@
+module DecisionAttendancesHelper
+end

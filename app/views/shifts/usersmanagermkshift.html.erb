@@ -5,47 +5,6 @@
     <meta charset="utf-8">
 </head>
 <body>
-<%#<% if @shifts_by_user.present? %>
-  <%#<% @shifts_by_date = @shifts.group_by { |shift| shift[:employee_work_time_start]&.to_date} %>
-  <%#<% @shifts_by_date.each do |date, shifts| %>
-    <%#<div>
-      <h2>日にち: <%= date %></h2>
-      <%#<table border="1">
-        <thead>
-          <tr>
-            <th>従業員ID</th>
-            <th>従業員名</th>
-            <th>出勤開始時間</th>
-            <th>出勤終了時間</th>
-            <th>登録</th>
-          </tr>
-        </thead>
-        <tbody>
-            <% shifts.each do |shift| %>
-              <%#<tr>
-                <td><%= shift.user_id %></td>
-                <%#<td><%= shift.user.employee_name %></td>
-                <%#<td><%= shift.employee_work_time_start %></td>
-                <%#<td><%= shift.employee_work_time_end %></td>
-                <%#<td><%= form_with url: save_shifts_shifts_path, method: :post do |f| %>
-                    <%#<%= f.hidden_field :user_id, value: shift.user_id %>
-                    <%#<%= f.hidden_field :employee_work_time_start, value: shift.employee_work_time_start %>
-                    <%#<%= f.hidden_field :employee_work_time_end, value: shift.employee_work_time_end %>
-                    <%#<%= submit_tag '保存' %>
-                    <%#<% end %>
-                <%#</td>
-              </tr>
-            <% end %>
-
-        <%#</tbody>
-      </table>
-    </div>
-  <% end %>
-<%#<% else %>
-  <p>従業員のシフト登録が１件もありません</p>
-<%#<% end %>
-
-
 <% if @shifts_by_user.present? %>
   <% @shifts_by_date = @shifts.group_by { |shift| shift[:employee_work_time_start]&.to_date } %>
   <% @shifts_by_date.each do |date, shifts| %>
@@ -96,7 +55,4 @@
 <% if @show_special_link3 %>
  <p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %> ☆</p>
 <% end %>
-
-
-
 </body>

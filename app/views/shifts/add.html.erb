@@ -5,8 +5,6 @@
 
 <h2>
 <%= form_with url: shifts_path do |form| %>
-
-<%#= form_with model: @shift do |from| %>
   <div class="field">
     <%= form.label :employee_work_time_start, "出勤開始時間" %>
     <%= form.datetime_field :employee_work_time_start %>
@@ -23,9 +21,29 @@
   </div>
 <% end %>
 
-<p>☆
-<%= link_to("ホームへ戻る", "/shifts") %>
-☆</p>
+//
+
+<% current_date = Time.zone.now.strftime("%Y-%m") %>
+
+<%= form_with url: shifts_path, local: true do |form| %>
+  <div class="field">
+    <%= form.label :employee_work_time_start, "出勤開始時間" %>
+    <%= form.datetime_local_field :employee_work_time_start, step: 1800, min: "#{current_date}T09:00", max: "#{current_date}T23:00" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :employee_work_time_end, "出勤終了時間" %>
+    <%= form.datetime_local_field :employee_work_time_end, step: 1800, min: "#{current_date}T09:00", max: "#{current_date}T23:00" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+<p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
 
 </h2>
 

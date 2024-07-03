@@ -3,43 +3,16 @@
 <h2>自分が働ける、曜日と時間を登録しておきましょう！！</h2>
 
 <div class="user-info box">
-  <h3>ログインユーザー情報</h3>
+  <h2>ログインユーザー情報</h2>
+  <h3>
   <p>ID:<%= current_user.id %></p>
   <p>名前:<%= current_user.employee_name %></p>
+  </h3>
 </div>
-
-<%#<% if @decision_attendances_by_date.present? %>
-  <%#<% @decision_attendances_by_date.each do |date, decision_attendances| %>
-    <%#<div>
-      <h2>日にち: <%= date %></h2>
-      <%#<table border="1">
-        <thead>
-          <tr>
-            <th>従業員名</th>
-            <th>日にち</th>
-            <th>時間</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% decision_attendances.each do |decision_attendances| %>
-            <%#<tr>
-              <td><%= decision_attendances.user.employee_name %></td>
-              <%#<td><%= decision_attendances.employee_work_time_start.to_date %></td>
-              <%#<td><<%= decision_attendances.employee_work_time_start %></td>
-              <%#<td><%= decision_attendances.employee_work_time_end %></td>
-            <%#</tr>
-          <% end %>
-        <%#</tbody>
-      </table>
-    </div>
-  <% end %>
-<%#<% else %>
-  <%#<p>シフトが登録されていません。</p>
-<% end %>
 
 <% if @users.present? %>
   <div>
-  <h1><%= @dates.first.strftime("%m") %>月のシフト</h1>
+    <h1><%= @dates.first.strftime("%m") %>月のシフト</h1>
     <table border="1">
       <thead>
         <tr>
@@ -57,7 +30,11 @@
               <% attendance = user.decision_attendances.find_by("DATE(employee_work_time_start) = ?", date) %>
               <td>
                 <% if attendance.present? %>
-                  <%= attendance.employee_work_time_start.strftime("%H:%M") %> - <%= attendance.employee_work_time_end.strftime("%H:%M") %>
+                  <% if attendance.employee_decision_day_off %>
+                    休
+                  <% else %>
+                    <%= attendance.employee_work_time_start.strftime("%H:%M") %> - <%= attendance.employee_work_time_end.strftime("%H:%M") %>
+                  <% end %>
                 <% else %>
                   -
                 <% end %>
@@ -72,17 +49,19 @@
   <p>シフトが登録されていません。</p>
 <% end %>
 
-<h2>☆
-<%= link_to("出勤条件の登録はこちら", "/shifts/add") %>
-☆
-<p>☆
-<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>
-★</p>
+
+
+<h2>
+☆<%= link_to("出勤条件の登録はこちら", "/shifts/add") %>☆
+<p>☆<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>☆</p>
+<p>☆<%= link_to("シフト変更申請はこちら", "/shifts/requesteddayoff")%>☆</p>
 
  <% if @show_special_link %>
  <p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>☆</p>
  <p>☆<%= link_to "従業員一覧はこちら", "/shifts/usersmanager" %>☆</p>
-  <% end %>
+ <p>☆<%= link_to "確定シフト一覧はこちら", "/shifts/usersmanageradd" %>☆</p>
+ <p>☆<%= link_to "希望休リクエスト一覧はこちら", "/shifts/decisiondayoff" %>☆</p>
+<% end %>
 
    
 

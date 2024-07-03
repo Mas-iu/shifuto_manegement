@@ -1,0 +1,44 @@
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+    <h3>ログインユーザー情報
+    <div style="background-color: yellow; padding: 10px;">
+    <p>ID: <%= current_user.id %></p>
+    <p>名前: <%= current_user.employee_name %></p>
+    </div>
+
+  <h3>シフト変更申請</h3>
+  <h3>↓休みたい日を選択してください↓
+      ※この表に表示されているシフトは現在確定済みになっているシフトです
+  </h3>
+
+  <%= form_with url: save_requested_days_off_shifts_path, method: :post do %>
+  <table>
+    <thead>
+      <tr>
+        <th>選択</th>
+        <th>出勤開始時間</th>
+        <th>出勤終了時間</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @shifts.present? %>
+        <% @shifts.each do |shift| %>
+          <tr>
+            <td><%= check_box_tag 'requested_days_off[]', shift.id %></td>
+            <td><%= shift.employee_work_time_start %></td>
+            <td><%= shift.employee_work_time_end %></td>
+          </tr>
+        <% end %>
+        <% else %>
+          <tr>
+            <td colspan="3">シフトの登録ができていません。</td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag '休みをリクエスト' %>
+  <% end %>
+  <p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
+</body>

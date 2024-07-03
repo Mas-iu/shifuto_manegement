@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_25_060140) do
+ActiveRecord::Schema.define(version: 2024_07_03_042816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2024_06_25_060140) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.integer "employee_requested_day_off"
+    t.integer "employee_decision_day_off"
     t.index ["employee_work_time_end"], name: "index_decision_attendances_on_employee_work_time_end"
     t.index ["employee_work_time_start"], name: "index_decision_attendances_on_employee_work_time_start"
     t.index ["user_id"], name: "index_decision_attendances_on_user_id"

@@ -1,4 +1,37 @@
-<h1>未定</h1>
-<h2>
+<h1>確定シフト一覧</h1>
+<p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
+<% if @decisionattendances_by_date.present? %>
+  <% @decisionattendances_by_date.each do |date, decisionattendances| %>
+    <div>
+      <h2>日にち: <%= date %></h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>従業員ID</th>
+            <th>従業員名</th>
+            <th>出勤開始時間</th>
+            <th>出勤終了時間</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% decisionattendances.each do |decisionattendance| %>
+            <tr>
+              <td><%= decisionattendance.user_id %></td>
+              <td><%= decisionattendance.user.employee_name %></td>
+              <td><%= decisionattendance.employee_work_time_start %></td>
+              <td><%= decisionattendance.employee_work_time_end %></td>
+              <td>
+                <%#= link_to '削除', decision_attendance_path(decisionattendance), method: :delete, data: { confirm: '本当にこのシフトを削除しますか？' } %>
+                <%= button_to '削除', decision_attendance_path(decisionattendance), :method => :delete, data: { confirm: '本当にこのシフトを削除しますか？' } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <p>シフトの登録がありません。</p>
+<% end %>
 
-</h2>

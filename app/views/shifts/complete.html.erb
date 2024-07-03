@@ -1,11 +1,17 @@
 <h1>登録完了！</h1>
-<p>☆
-<%= link_to("ホームへ戻る", "/shifts") %>
-☆</p>
+<h2>
+<p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
+
 <% if @show_special_link2 %>
- <p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>☆</p>
+<p>☆<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>☆</p>
+<p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>☆</p>
+<p>☆<%= link_to "確定シフト一覧はこちら", "/shifts/usersmanageradd" %>☆</p>
+<p>☆<%= link_to "希望休リクエスト一覧はこちら", "/shifts/decisiondayoff" %>☆</p>
+<p>☆<%= link_to("シフト変更申請はこちら", "/shifts/requesteddayoff")%>☆</p>
 
 <% else%>
     <p>☆<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%> ★</p>
+    <p>☆<%= link_to("シフト変更申請はこちら", "/shifts/requesteddayoff")%>☆</p>
 <% end %>
+</h2>
  
