@@ -1,4 +1,4 @@
-<h1>管理者シフト登録ページ</h1>
+<h1>シフト確定登録ページ</h1>
 <p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
 <!-- app/views/shifts/user_shifts.html.erb -->
 <head>
@@ -47,12 +47,10 @@
 <% else %>
   <p>従業員のシフト登録が１件もありません</p>
 <% end %>
-
-
-
-  <p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
-
-<% if @show_special_link3 %>
- <p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %> ☆</p>
-<% end %>
+  <h3>
+  <div class="button_line001">
+    <%= link_to "ホームへ戻る", "/shifts" %>
+    <%= link_to "シフト確定登録", "/shifts/usersmanagermkshift" %>
+  </div>
+  </h3>
 </body>

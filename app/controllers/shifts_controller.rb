@@ -1,4 +1,5 @@
 class ShiftsController < ApplicationController
+    before_action :set_new_requests_count, only: [:index, :mypage, :requesteddayoff]
     
     def index
         @decision_attendances = DecisionAttendance.includes(:user).all
@@ -7,6 +8,10 @@ class ShiftsController < ApplicationController
         #@users = User.select(:id, :employee_name, :employee_name_kana)
         @users = User.includes(:decision_attendances).all
         @show_special_link = (current_user.id == 3)
+    end
+    
+    def set_new_requests_count
+        @new_requests_count = DecisionAttendance.unapproved_requests.count
     end
 
     def add

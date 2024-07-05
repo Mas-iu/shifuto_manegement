@@ -1,4 +1,4 @@
-<h1>↓希望休リクエストを確定してください↓</h1>
+<h1>希望休リクエストを確定してください</h1>
 
 <%= form_with url: save_decision_days_off_shifts_path, method: :post, local: true do %>
   <table border="1">
@@ -39,8 +39,12 @@
       <% end %>
     </tbody>
   </table>
-  <%= submit_tag '休みを確定' %>
+  <div style="background-color: yellow; padding: 10px;">
+        <%= submit_tag '休みを確定' %>
+  </div>
 <% end %>
-<p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
 
 
+<div class="button003">
+<%= link_to("ホームへ戻る", "/shifts") %>
+</div>

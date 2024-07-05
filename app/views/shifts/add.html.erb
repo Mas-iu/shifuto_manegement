@@ -1,13 +1,19 @@
-<div style="text-align: center">
-  <h1>出勤条件登録</h1>
+  <p>ログインユーザー情報
+    <div style="background-color: yellow; padding: 10px;">
+      <p>ID: <%= current_user.id %></p>
+      <p>名前: <%= current_user.employee_name %></p>
+    </div>
+  </p>
+   
+   <h1>出勤条件登録</h1>
+
+
   <div>
     <h3>自分が働ける、曜日と時間を登録しておきましょう</h3>
     <p>下記の選択をした後、登録ボタンを押してください。</p>
     <p>※登録ボタンを押さないと、出勤条件が未登録となります</p>
   
-
-
-        <h2>
+    <h2>
         <%#= form_with url: shifts_path do |form| 
           <div class="field">
             <%= form.label :employee_work_time_start, "出勤開始時間" 
@@ -44,13 +50,15 @@
         <% end %>
         </h3>
   </div>
+
+
+
+<p>
+<div class="button_line001">
+  <%= link_to "ホームへ戻る", "/shifts" %>
+  <%= link_to "シフト登録確認", "/shifts/mypage" %>
 </div>
+</p>
 
-
-
-<p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
-<p>☆<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>☆</p>
-
-</h2>
 
 
