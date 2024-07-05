@@ -106,38 +106,65 @@ class ShiftsController < ApplicationController
         @shifts = PossibilityAttendance.select(:employee_work_time_start, :employee_work_time_end).where(user_id: current_user.id)
     end
 
+    # def requesteddayoff
+        # @shifts = DecisionAttendance.select(:id, :employee_work_time_start, :employee_work_time_end).where(user_id: current_user.id)
+    # end
+
+    # def save_requested_days_off
+        # if params[:requested_days_off].present?
+            # params[:requested_days_off].each do |shift_id|
+            # shift = DecisionAttendance.find(shift_id)
+            # shift.update(employee_requested_day_off: true)
+        # end
+            # redirect_to complete_shifts_path, notice: '休みのリクエストが保存されました。'
+        # else
+            # redirect_to complete_shifts_path, alert: '休みのリクエストを選択してください。'
+        # end
+    # end
+
     def requesteddayoff
-        @shifts = DecisionAttendance.select(:id, :employee_work_time_start, :employee_work_time_end).where(user_id: current_user.id)
+        @decision_attendances = DecisionAttendance.where(user_id: current_user.id)
     end
 
     def save_requested_days_off
-        if params[:requested_days_off].present?
-            params[:requested_days_off].each do |shift_id|
-            shift = DecisionAttendance.find(shift_id)
-            shift.update(employee_requested_day_off: true)
+        requested_shift_ids = params[:requested_days_off]
+        if requested_shift_ids.present?
+          requested_shift_ids.each do |id|
+            attendance = DecisionAttendance.find(id)
+            attendance.update(employee_requested_day_off: true)
+          end
         end
-            redirect_to complete_shifts_path, notice: '休みのリクエストが保存されました。'
-        else
-            redirect_to complete_shifts_path, alert: '休みのリクエストを選択してください。'
-        end
+        redirect_to complete_shifts_path, notice: '休みのリクエストが完了しました。'
     end
+
+
 
     def decisiondayoff
         @decisionattendances = DecisionAttendance.where(employee_requested_day_off: true)
     end
 
-    def save_decision_days_off
-        if params[:decision_days_off].present?
-            params[:decision_days_off].each do |shift_id|
-            decisionattendance = DecisionAttendance.find(shift_id)
-            decisionattendance.update(employee_decision_day_off: true)
-        end
-            redirect_to complete_shifts_path, notice: '休みが確定されました。'
-        else
-            redirect_to complete_shifts_path, alert: '休みを選択してください。'
-        end
-    end
 
+    # def save_decision_days_off
+        # if params[:decision_days_off].present?
+            # params[:decision_days_off].each do |shift_id|
+            # decisionattendance = DecisionAttendance.find(shift_id)
+            # decisionattendance.update(employee_decision_day_off: true)
+        # end
+            # redirect_to complete_shifts_path, notice: '休みが確定されました。'
+        # else
+            # redirect_to complete_shifts_path, alert: '休みを選択してください。'
+        # end
+    # end
+    def save_decision_days_off
+        decision_day_off_ids = params[:decision_days_off]
+        if decision_day_off_ids.present?
+          decision_day_off_ids.each do |id|
+            attendance = DecisionAttendance.find(id)
+            attendance.update(employee_decision_day_off: true)
+          end
+        end
+        redirect_to complete_shifts_path, notice: '休みのリクエストが完了しました。'
+    end
 
 
 

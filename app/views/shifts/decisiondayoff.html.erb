@@ -1,5 +1,6 @@
 <h1>↓希望休リクエストを確定してください↓</h1>
-<%= form_with url: save_decision_days_off_shifts_path, method: :post do %>
+
+<%= form_with url: save_decision_days_off_shifts_path, method: :post, local: true do %>
   <table border="1">
     <thead>
       <tr>
@@ -7,25 +8,39 @@
         <th>従業員名</th>
         <th>出勤開始時間</th>
         <th>出勤終了時間</th>
+        <th>ステータス</th>
       </tr>
     </thead>
     <tbody>
       <% if @decisionattendances.present? %>
         <% @decisionattendances.each do |decisionattendance| %>
           <tr>
-            <td><%= check_box_tag 'decision_days_off[]', decisionattendance.id %></td>
+            <td>
+              <% unless decisionattendance.employee_decision_day_off %>
+                <%= check_box_tag 'decision_days_off[]', decisionattendance.id %>
+              <% end %>
+            </td>
             <td><%= decisionattendance.user.employee_name %></td>
             <td><%= decisionattendance.employee_work_time_start %></td>
             <td><%= decisionattendance.employee_work_time_end %></td>
+            <td>
+              <% if decisionattendance.employee_decision_day_off %>
+                承認済み
+              <% else %>
+                未承認
+              <% end %>
+            </td>
           </tr>
         <% end %>
       <% else %>
         <tr>
-          <td colspan="4">休みのリクエストがありません。</td>
+          <td colspan="5">休みのリクエストがありません。</td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <%= submit_tag '休みを確定' %>
 <% end %>
+<p>☆<%= link_to("ホームへ戻る", "/shifts") %>☆</p>
+
 
