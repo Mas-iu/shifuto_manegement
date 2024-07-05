@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_03_042816) do
+ActiveRecord::Schema.define(version: 2024_07_04_084013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2024_07_03_042816) do
     t.index ["employee_work_time_end"], name: "index_possibility_attendances_on_employee_work_time_end"
     t.index ["employee_work_time_start"], name: "index_possibility_attendances_on_employee_work_time_start"
     t.index ["user_id"], name: "index_possibility_attendances_on_user_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.datetime "employee_work_time_start"
+    t.datetime "employee_work_time_end"
+    t.boolean "requested", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

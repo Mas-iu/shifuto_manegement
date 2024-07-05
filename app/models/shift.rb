@@ -1,4 +1,5 @@
 class Shift < ApplicationRecord
+    
     validates :employee_work_time_start, presence: true
     validates :employee_work_time_end, presence: true
     validate :start_time_before_end_time

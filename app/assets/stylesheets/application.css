@@ -15,7 +15,7 @@
  */
 
  table{
-    width: 100%;
+    width: 200%;
     border-collapse:separate;
     border-spacing: 0;
   }
@@ -82,4 +82,47 @@
     width: 150px;
     text-align: center;
   }
+
+  
+/* 003 */
+.button003 {
+  display: flex; /* フレックスボックスを使用して横並びにする */
+  gap: 0.1px; /* ボタン間のスペースを調整 */
+}
+.button003 a {
+  background: #eee;
+  border-radius: 50px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 260px;
+  padding: 10px 25px;
+  color: #313131;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+.button003 a:hover {
+  background: #313131;
+  color: #FFF;
+}
+.button003 a:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #313131;
+  border-right: 3px solid #313131;
+  transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-radius: 1px;
+  transition: 0.3s ease-in-out;
+}
+.button003 a:hover:after {
+  border-color: #FFF;
+}
+  
+
   

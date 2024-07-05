@@ -1,6 +1,10 @@
 <title>Hello Ruby</title>
-<h1>シフト作成サービス</h1>
-<h2>自分が働ける、曜日と時間を登録しておきましょう！！</h2>
+<div style="text-align: center">
+  <h1>シフト作成サービス</h1>
+  <div>
+    <h2>自分が働ける、曜日と時間を登録しておきましょう！！</h2>
+  </div>
+</div>
 
 <div class="user-info box">
   <h2>ログインユーザー情報</h2>
@@ -9,6 +13,22 @@
   <p>名前:<%= current_user.employee_name %></p>
   </h3>
 </div>
+
+<h2>
+  <div class="button003">
+  <%= link_to "出勤条件の登録", "/shifts/add" %> 
+  <%= link_to("シフト登録確認", "/shifts/mypage")%>
+  <%= link_to("シフト変更申請", "/shifts/requesteddayoff")%>
+    <% if @show_special_link %>
+      <%= link_to "シフト管理者登録確認", "/shifts/usersmanagermkshift" %>
+      <%= link_to "従業員一覧", "/shifts/usersmanager" %>
+      <%= link_to "確定シフト一覧", "/shifts/usersmanageradd" %>
+      <%= link_to "希望休リクエスト一覧", "/shifts/decisiondayoff" %>
+    <% end %>
+  </div>
+</h2>
+
+
 
 <% if @users.present? %>
   <div>
@@ -50,21 +70,18 @@
 <% end %>
 
 
-
+<%#
 <h2>
-☆<%= link_to("出勤条件の登録はこちら", "/shifts/add") %>☆
-<p>☆<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%>☆</p>
-<p>☆<%= link_to("シフト変更申請はこちら", "/shifts/requesteddayoff")%>☆</p>
+☆<%= link_to("出勤条件の登録はこちら", "/shifts/add") %>
+<%#<p>☆<%= link_to("シフト登録確認はこちら", "/shifts/mypage")%></p>
+<%#<p>☆<%= link_to("シフト変更申請はこちら", "/shifts/requesteddayoff")%></p>
 
- <% if @show_special_link %>
- <p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %>☆</p>
- <p>☆<%= link_to "従業員一覧はこちら", "/shifts/usersmanager" %>☆</p>
- <p>☆<%= link_to "確定シフト一覧はこちら", "/shifts/usersmanageradd" %>☆</p>
- <p>☆<%= link_to "希望休リクエスト一覧はこちら", "/shifts/decisiondayoff" %>☆</p>
-<% end %>
+ <%#<% if @show_special_link %>
+ <%#<p>☆<%= link_to "シフト管理者登録確認はこちら", "/shifts/usersmanagermkshift" %></p>
+ <%#<p>☆<%= link_to "従業員一覧はこちら", "/shifts/usersmanager" %></p>
+ <%#<p>☆<%= link_to "確定シフト一覧はこちら", "/shifts/usersmanageradd" %></p>
+ <%#<p>☆<%= link_to "希望休リクエスト一覧はこちら", "/shifts/decisiondayoff" %></p>
+<%#<% end %>
 
-   
-
-</h2>
 
 

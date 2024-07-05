@@ -37,34 +37,28 @@ require("channels").
     function setConstraints(field) {
       if (field) {
         var currentDate = new Date();
-        var minTime = new Date(currentDate.setHours(9, 0, 0)).toISOString().slice(0, 16);
-        var maxTime = new Date(currentDate.setHours(23, 0, 0)).toISOString().slice(0, 16);
+        var minTime = currentDate.toISOString().split('T')[0] + 'T09:00';
+        var maxTime = currentDate.toISOString().split('T')[0] + 'T23:00';
         
         field.setAttribute('min', minTime);
         field.setAttribute('max', maxTime);
         field.setAttribute('step', '1800'); // 30分ごと
+      }
+    }
   
-        // オプションを30分単位に制限
-        field.addEventListener('focus', function() {
-          var optionTimes = [];
-          var start = new Date(currentDate.setHours(9, 0, 0));
-          var end = new Date(currentDate.setHours(23, 0, 0));
+    function validateTimeRange(event) {
+      var startField = document.querySelector('input[type="datetime-local"][name="possibility_attendance[employee_work_time_start]"]');
+      var endField = document.querySelector('input[type="datetime-local"][name="possibility_attendance[employee_work_time_end]"]');
+      
+      var startTime = new Date(startField.value);
+      var endTime = new Date(endField.value);
   
-          for (var i = start; i <= end; i.setMinutes(i.getMinutes() + 30)) {
-            optionTimes.push(new Date(i).toISOString().slice(0, 16));
-          }
+      var minTime = new Date(startTime.toISOString().split('T')[0] + 'T09:00');
+      var maxTime = new Date(startTime.toISOString().split('T')[0] + 'T23:00');
   
-          field.setAttribute('list', 'timeOptions');
-          var datalist = document.createElement('datalist');
-          datalist.id = 'timeOptions';
-          optionTimes.forEach(function(time) {
-            var option = document.createElement('option');
-            option.value = time;
-            datalist.appendChild(option);
-          });
-  
-          document.body.appendChild(datalist);
-        });
+      if (startTime < minTime || startTime > maxTime || endTime < minTime || endTime > maxTime) {
+        alert('出勤時間は09:00〜23:00の範囲内で設定してください。');
+        event.preventDefault(); // フォーム送信を停止
       }
     }
   
@@ -73,6 +67,13 @@ require("channels").
     
     setConstraints(startField);
     setConstraints(endField);
+  
+    var form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', validateTimeRange);
+    }
   });
+  
+  
   
   
